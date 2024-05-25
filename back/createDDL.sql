@@ -1,0 +1,5 @@
+CREATE TABLE materials (material_id BIGINT AUTO_INCREMENT NOT NULL, material_description LONGTEXT, material_name VARCHAR(255), material_photo LONGBLOB, material_quantity INTEGER, material_unit VARCHAR(255), tutorial_id BIGINT, PRIMARY KEY (material_id))
+CREATE TABLE tutorials (tutorial_id BIGINT AUTO_INCREMENT NOT NULL, cost DOUBLE, tutorial_description LONGTEXT, difficulty_level VARCHAR(255), tutorial_photo LONGBLOB, time_to_complete INTEGER, tutorial_title VARCHAR(255), tools VARCHAR(255), tutorial_type VARCHAR(255), PRIMARY KEY (tutorial_id))
+CREATE TABLE steps (step_id BIGINT AUTO_INCREMENT NOT NULL, step_description LONGTEXT, step_photo LONGBLOB, sequence_number INTEGER, step_title VARCHAR(255), tutorial_id BIGINT, PRIMARY KEY (step_id))
+ALTER TABLE materials ADD CONSTRAINT FK_materials_tutorial_id FOREIGN KEY (tutorial_id) REFERENCES tutorials (tutorial_id)
+ALTER TABLE steps ADD CONSTRAINT FK_steps_tutorial_id FOREIGN KEY (tutorial_id) REFERENCES tutorials (tutorial_id)
