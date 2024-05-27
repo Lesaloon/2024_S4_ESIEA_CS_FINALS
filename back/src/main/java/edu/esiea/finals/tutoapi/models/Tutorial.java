@@ -17,7 +17,7 @@ public class Tutorial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tutorial_id")
-    private Long id;
+    private int id;
     
     @Column(name = "tutorial_title")
     private String title;
@@ -58,14 +58,14 @@ public class Tutorial {
 	/**
 	 * @return the id
 	 */
-	public final Long getId() {
+	public final int getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public final void setId(Long id) {
+	public final void setId(int id) {
 		this.id = id;
 	}
 

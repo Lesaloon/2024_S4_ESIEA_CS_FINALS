@@ -11,7 +11,7 @@ public class Material {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "material_id")
-    private Long id;
+    private int id;
     
     @Column(name = "material_name")
     private String name;
@@ -32,14 +32,14 @@ public class Material {
     /**
 	 * @return the id
 	 */
-	public final Long getId() {
+	public final int getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public final void setId(Long id) {
+	public final void setId(int id) {
 		this.id = id;
 	}
 

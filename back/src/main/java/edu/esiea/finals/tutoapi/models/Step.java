@@ -12,7 +12,7 @@ public class Step {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "step_id")
-    private Long id;
+    private int id;
     
     @Column(name = "step_title")
     private String title;
@@ -32,14 +32,14 @@ public class Step {
     /**
 	 * @return the id
 	 */
-	public final Long getId() {
+	public final int getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public final void setId(Long id) {
+	public final void setId(int id) {
 		this.id = id;
 	}
 
