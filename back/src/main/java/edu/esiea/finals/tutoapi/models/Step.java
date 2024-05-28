@@ -3,8 +3,7 @@ package edu.esiea.finals.tutoapi.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "steps")
-
+@Table(name = "step")
 @NamedQueries({ @NamedQuery(name = "Step.findAll", query = "SELECT s FROM Step s"),
 		@NamedQuery(name = "Step.findById", query = "SELECT s FROM Step s WHERE s.id = :id") })
 public class Step {

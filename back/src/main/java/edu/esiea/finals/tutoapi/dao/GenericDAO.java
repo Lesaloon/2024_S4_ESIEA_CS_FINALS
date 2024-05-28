@@ -3,10 +3,9 @@ package edu.esiea.finals.tutoapi.dao;
 import java.util.List;
 import java.util.function.Predicate;
 
+import edu.esiea.finals.tutoapi.interfaces.IDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import edu.esiea.finals.tutoapi.interfaces.IDAO;
 
 public class GenericDAO<T> implements IDAO<T> {
 
@@ -53,15 +52,6 @@ public class GenericDAO<T> implements IDAO<T> {
 
 	@Override
 	public List<T> readAll() throws Exception {
-		if (this.bdd == null) {
-			try {
-				this.bdd = DAOBDDHelper.getInstance();
-				this.em = this.bdd.getEm();
-			} catch (final Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Unable to create EntityManager");
-			}
-		}
 		final Query query = this.em.createQuery("select e from " + this.persistentClass.getSimpleName() + " e");
 		// Récupère
 		return query.getResultList();

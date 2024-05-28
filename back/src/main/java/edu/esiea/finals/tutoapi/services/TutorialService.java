@@ -1,54 +1,152 @@
 package edu.esiea.finals.tutoapi.services;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import edu.esiea.finals.tutoapi.models.Step;
-import edu.esiea.finals.tutoapi.models.Tutorial;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
+import edu.esiea.finals.tutoapi.dao.DAOFactory;
+import edu.esiea.finals.tutoapi.models.*;
+import edu.esiea.finals.tutoapi.services.helpers.JSONResponseBuilder;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.*;
 
 @Path("/tutorials")
 public class TutorialService {
-
+	
 	// TODO : Configure logger in the log4j2.xml file
 	private static final Logger logger = LogManager.getLogger(TutorialService.class);
-	
+
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllTutorials() {
-		return Response.ok().entity("Hello World").build();
+		logger.info("Fetching all tutorials");
+		try {
+			final List<Tutorial> tutorials = DAOFactory.getTutorialDAO().readAll();
+			final String entity = JSONResponseBuilder.createSuccessResponse("Tutorials fetched successfully", tutorials);
+			return Response.ok().entity(entity).build();
+		} catch (Exception e) {
+			logger.error("An error occurred while fetching all tutorials", e);
+			final String entity = JSONResponseBuilder.createErrorResponse("An error occurred while fetching all tutorials", e);
+			return Response.serverError().entity(entity).build();
+		}
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getTutorialById(@PathParam("id") int id) {
-		return Response.ok().entity("Hello World").build();
+		logger.info("Fetching tutorial id {}", id);
+		try {
+			final Tutorial tutorial = DAOFactory.getTutorialDAO().read(id);
+			final String entity = JSONResponseBuilder.createSuccessResponse("Tutorial fetched successfully", tutorial);
+			return Response.ok().entity(entity).build();
+		} catch (Exception e) {
+			logger.error("An error occurred while fetching tutorial id {}", id, e);
+			final String entity = JSONResponseBuilder
+					.createErrorResponse("An error occurred while fetching tutorial id " + id, e);
+			return Response.serverError().entity(entity).build();
+		}
 	}
-
+	
 	@POST
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addTutorial(Tutorial tutorial) {
-		return Response.ok().entity("Hello World").build();
+		try {
+			DAOFactory.getTutorialDAO().create(tutorial);
+			final String entity = JSONResponseBuilder.createSuccessResponse("Tutorial added successfully", tutorial);
+			return Response.ok().entity(entity).build();
+		} catch (Exception e) {
+			logger.error("An error occurred while adding tutorial", e);
+			final String entity = JSONResponseBuilder.createErrorResponse("An error occurred while adding tutorial", e);
+			return Response.serverError().entity(entity).build();
+		}
 	}
-
-	@PUT
-	@Path("/update")
+	
+	/*
+	@POST
+	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateTutorial(Tutorial tutorial) {
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response addTutorial(MultivaluedMap<String, String> formParams) {
+		for (String field : TUTORIAL_FIELDS) {
+			if (!formParams.containsKey(field)) {
+				final String entity = JSONResponseBuilder.createErrorResponse("Missing field " + field, null);
+				return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+			}
+		}
+		// fetch materials and steps from the form parameters
+		List<Material> materials = new ArrayList<>();
+		if (formParams.containsKey("materials")) {
+            String[] materialIds = formParams.getFirst("materials").split(",");
+            for (String materialId : materialIds) {
+                Material material;
+				try {
+					material = DAOFactory.getMaterialDAO().read(Integer.parseInt(materialId));
+				} catch (Exception e) {
+					logger.error("An error occurred while fetching material id {}", materialId, e);
+					final String entity = JSONResponseBuilder
+							.createErrorResponse("An error occurred while fetching material id " + materialId, e);
+					return Response.serverError().entity(entity).build();
+				}
+                materials.add(material);
+            }
+        }
+		// fetch steps from the form parameters
+		List<Step> steps = new ArrayList<>();
+		if (formParams.containsKey("steps")) {
+            String[] stepIds = formParams.getFirst("steps").split(",");
+            for (String stepId : stepIds) {
+                Step step;
+				try {
+					step = DAOFactory.getStepDAO().read(Integer.parseInt(stepId));
+				} catch (NumberFormatException e) {
+					logger.error("An error occurred while parsing step id", e);
+					final String entity = JSONResponseBuilder.createErrorResponse("An error occurred while parsing step id", e);
+					return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+				} catch (Exception e) {
+					logger.error("An error occurred while fetching step id {}", stepId, e);
+					final String entity = JSONResponseBuilder.createErrorResponse("An error occurred while fetching step id " + stepId, e);
+					return Response.serverError().entity(entity).build();
+				}
+                steps.add(step);
+            }
+        }
+		
+		try {
+			// create tutorial from the form parameters
+			Tutorial tutorial = new Tutorial(
+					formParams.getFirst("title"),
+					Type.valueOf(formParams.getFirst("type")),
+					formParams.getFirst("description"),
+					formParams.getFirst("tools"),
+					materials,
+					formParams.getFirst("photo").getBytes(),
+					Integer.parseInt(formParams.getFirst("timeToComplete")),
+					Double.parseDouble(formParams.getFirst("cost")),
+					DifficultyLevel.valueOf(formParams.getFirst("difficultyLevel")),
+					steps);
+			DAOFactory.getTutorialDAO().create(tutorial);
+			final String entity = JSONResponseBuilder.createSuccessResponse("Tutorial added successfully", tutorial);
+			return Response.ok().entity(entity).build();
+			
+		} catch (Exception e) {
+			logger.error("An error occurred while adding tutorial", e);
+			final String entity = JSONResponseBuilder.createErrorResponse("An error occurred while adding tutorial", e);
+			return Response.serverError().entity(entity).build();
+		}
+		
+	}
+	*/
+		
+	@PUT
+	@Path("/update/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
+	public Response updateTutorial(MultivaluedMap<String, String> formParams, @PathParam("id") int id) {
 		return Response.ok().entity("Hello World").build();
 	}
 
@@ -56,38 +154,20 @@ public class TutorialService {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteTutorial(@PathParam("id") int id) {
-		return Response.ok().entity("Hello World").build();
+		logger.info("Deleting tutorial id {}", id);
+		try {
+			DAOFactory.getTutorialDAO().delete(id);
+			final String entity = JSONResponseBuilder.createSuccessResponse("Tutorial deleted successfully", null);
+			return Response.ok().entity(entity).build();
+		} catch (Exception e) {
+			logger.error("An error occurred while deleting tutorial id {}", id, e);
+			final String entity = JSONResponseBuilder
+					.createErrorResponse("An error occurred while deleting tutorial id " + id, e);
+			return Response.serverError().entity(entity).build();
+		}
 	}
 
-	@GET
-	@Path("/{id}/steps")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStepsByTutorialId(@PathParam("id") int id) {
-		return Response.ok().entity("Hello World").build();
-	}
-
-	@GET
-	@Path("/{id}/materials")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getMaterialsByTutorialId(@PathParam("id") int id) {
-		return Response.ok().entity("Hello World").build();
-	}
-
-	@GET
-	@Path("/{id}/materials/{materialId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getMaterialByTutorialIdAndMaterialId(@PathParam("id") int id,
-			@PathParam("materialId") int materialId) {
-		return Response.ok().entity("Hello World").build();
-	}
-
-	@GET
-	@Path("/{id}/steps/{stepId}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getStepByTutorialIdAndStepId(@PathParam("id") int id, @PathParam("stepId") int stepId) {
-		return Response.ok().entity("Hello World").build();
-	}
-
+	/*
 	@POST
     @Path("/{id}/steps/add")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -95,4 +175,5 @@ public class TutorialService {
     public Response addStepToTutorial(@PathParam("id") int id, Step step) {
         return Response.ok().entity("Hello World").build();
 	}
+	*/
 }

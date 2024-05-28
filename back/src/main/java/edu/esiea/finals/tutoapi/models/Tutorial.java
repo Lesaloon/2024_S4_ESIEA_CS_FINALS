@@ -8,8 +8,7 @@ import edu.esiea.finals.tutoapi.models.enums.Type;
 import java.util.List;
 
 @Entity
-@Table(name = "tutorials")
-
+@Table(name = "tutorial")
 @NamedQueries({ @NamedQuery(name = "Tutorial.findAll", query = "SELECT t FROM Tutorial t"),
 		@NamedQuery(name = "Tutorial.findById", query = "SELECT t FROM Tutorial t WHERE t.id = :id") })
 public class Tutorial {

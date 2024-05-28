@@ -5,17 +5,19 @@ import javax.persistence.EntityManager;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
+import jakarta.persistence.*;
 
 @WebListener
 public class ContextListener implements ServletContextListener {
 
 	private static EntityManager em;
-
-	//	@Override
-	//	public void contextInitialized(ServletContextEvent sce) {
-	//		final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("CDC-API");
-	//		CDCContextListener.em = entityManagerFactory.createEntityManager();
-	//	}
+	
+//	@Override
+//	public void contextInitialized(ServletContextEvent sce) {
+//		final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TutoPU");
+//		ContextListener.em = entityManagerFactory.createEntityManager();
+//		
+//	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
@@ -24,7 +26,7 @@ public class ContextListener implements ServletContextListener {
 		}
 	}
 
-	public EntityManager getEntityManager() {
+	public static EntityManager getEntityManager() {
 		return ContextListener.em;
 	}
 }
