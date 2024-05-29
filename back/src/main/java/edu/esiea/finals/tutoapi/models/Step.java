@@ -26,7 +26,7 @@ public class Step {
     
     @Lob
     @Column(name = "step_photo")
-    private byte[] photo;
+    private String photo;
     
     /**
 	 * @return the id
@@ -87,14 +87,14 @@ public class Step {
 	/**
 	 * @return the photo
 	 */
-	public final byte[] getPhoto() {
+	public final String getPhoto() {
 		return photo;
 	}
 
 	/**
 	 * @param photo the photo to set
 	 */
-	public final void setPhoto(byte[] photo) {
+	public final void setPhoto(String photo) {
 		this.photo = photo;
 	}
 

@@ -21,7 +21,7 @@ public class Material {
     
     @Lob
     @Column(name = "material_photo")
-    private byte[] photo;
+    private String photo;
     
     @Column(name = "material_quantity")
     private Integer quantity;
@@ -73,14 +73,14 @@ public class Material {
 	/**
 	 * @return the photo
 	 */
-	public final byte[] getPhoto() {
+	public final String getPhoto() {
 		return photo;
 	}
 
 	/**
 	 * @param photo the photo to set
 	 */
-	public final void setPhoto(byte[] photo) {
+	public final void setPhoto(String photo) {
 		this.photo = photo;
 	}
 

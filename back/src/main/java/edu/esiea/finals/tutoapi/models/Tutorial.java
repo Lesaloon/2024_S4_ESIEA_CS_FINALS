@@ -38,7 +38,7 @@ public class Tutorial {
     
     @Lob
     @Column(name = "tutorial_photo")
-    private byte[] photo;
+    private String photo; // base64 encoded
     
     @Column(name = "time_to_complete")
     private Integer timeToComplete;
@@ -141,14 +141,14 @@ public class Tutorial {
 	/**
 	 * @return the photo
 	 */
-	public final byte[] getPhoto() {
+	public final String getPhoto() {
 		return photo;
 	}
 
 	/**
 	 * @param photo the photo to set
 	 */
-	public final void setPhoto(byte[] photo) {
+	public final void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
