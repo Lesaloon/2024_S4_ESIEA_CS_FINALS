@@ -145,8 +145,8 @@ public class TutorialService {
 	@PUT
 	@Path("/update/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_FORM_URLENCODED)
-	public Response updateTutorial(MultivaluedMap<String, String> formParams, @PathParam("id") int id) {
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response updateTutorial(Tutorial tutorial, @PathParam("id") int id) {
 		return Response.ok().entity("Hello World").build();
 	}
 
