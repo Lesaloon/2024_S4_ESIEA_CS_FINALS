@@ -166,14 +166,4 @@ public class TutorialService {
 			return Response.serverError().entity(entity).build();
 		}
 	}
-
-	/*
-	@POST
-    @Path("/{id}/steps/add")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response addStepToTutorial(@PathParam("id") int id, Step step) {
-        return Response.ok().entity("Hello World").build();
-	}
-	*/
 }
