@@ -11,13 +11,13 @@ export class ApiService {
 
   constructor(private HttpClientService: HttpClientService) { }
 
-  getAllTutorials() : Tutorial[] {
+  getAllTutorials() : Observable<Tutorial[]> {
     return this.HttpClientService.get<Tutorial>('tutorials/all')
   }
 
-  getTutorial(id: number) : Tutorial{
+  getTutorial(id: number) : Observable<Tutorial[]> {
     // there is only one element in the array, its an array only for the sake of the interface
-    return this.HttpClientService.get<Tutorial>('tutorials/' + id)[0];
+    return this.HttpClientService.get<Tutorial>('tutorials/' + id);
   }
 
   addTutorial(tutorial: Tutorial) {
