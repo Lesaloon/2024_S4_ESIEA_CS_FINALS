@@ -10,6 +10,7 @@ export interface Tutorial {
 	tools: string;
 	materials: Material[];
 	photo: string; // une représentation en base64
+	photoType: string; // le type de l'image ( image/png, image/jpeg, ...)
 	timeToComplete: number;
 	cost: number;
 	difficultyLevel: DifficultyLevel;
