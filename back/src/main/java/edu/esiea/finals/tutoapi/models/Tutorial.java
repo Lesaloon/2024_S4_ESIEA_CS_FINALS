@@ -2,6 +2,10 @@ package edu.esiea.finals.tutoapi.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
+
 import edu.esiea.finals.tutoapi.models.enums.DifficultyLevel;
 import edu.esiea.finals.tutoapi.models.enums.Type;
 
@@ -37,9 +41,12 @@ public class Tutorial {
     private List<Material> materials;
     
     @Lob
-    @Column(name = "tutorial_photo")
-    private String photo; // base64 encoded
+    @Column(name = "tutorial_photo")    
+    private String photo;
     
+    @Column(name = "tutorial_photo_type")
+    private String photoType; // image/jpeg, image/png, etc.
+
     @Column(name = "time_to_complete")
     private Integer timeToComplete;
     
@@ -150,6 +157,20 @@ public class Tutorial {
 	 */
 	public final void setPhoto(String photo) {
 		this.photo = photo;
+	}
+
+	/**
+	 * @return the photoType
+	 */
+	public final String getPhotoType() {
+		return photoType;
+	}
+
+	/**
+	 * @param photoType the photoType to set
+	 */
+	public final void setPhotoType(String photoType) {
+		this.photoType = photoType;
 	}
 
 	/**
