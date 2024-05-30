@@ -1,5 +1,5 @@
-CREATE TABLE material (material_id INTEGER AUTO_INCREMENT NOT NULL, material_description LONGTEXT, material_name VARCHAR(255), material_photo LONGBLOB, material_quantity INTEGER, material_unit VARCHAR(255), tutorial_id INTEGER, PRIMARY KEY (material_id))
-CREATE TABLE tutorial (tutorial_id INTEGER AUTO_INCREMENT NOT NULL, cost DOUBLE, tutorial_description LONGTEXT, difficulty_level VARCHAR(255), tutorial_photo LONGBLOB, time_to_complete INTEGER, tutorial_title VARCHAR(255), tools VARCHAR(255), tutorial_type VARCHAR(255), PRIMARY KEY (tutorial_id))
-CREATE TABLE step (step_id INTEGER AUTO_INCREMENT NOT NULL, step_description LONGTEXT, step_photo LONGBLOB, sequence_number INTEGER, step_title VARCHAR(255), tutorial_id INTEGER, PRIMARY KEY (step_id))
+CREATE TABLE material (material_id INTEGER AUTO_INCREMENT NOT NULL, material_description LONGTEXT, material_name VARCHAR(255), material_photo LONGTEXT, material_quantity INTEGER, material_unit VARCHAR(255), tutorial_id INTEGER, PRIMARY KEY (material_id))
+CREATE TABLE tutorial (tutorial_id INTEGER AUTO_INCREMENT NOT NULL, cost DOUBLE, tutorial_description LONGTEXT, difficulty_level VARCHAR(255), tutorial_photo LONGTEXT, time_to_complete INTEGER, tutorial_title VARCHAR(255), tools VARCHAR(255), tutorial_type VARCHAR(255), PRIMARY KEY (tutorial_id))
+CREATE TABLE step (step_id INTEGER AUTO_INCREMENT NOT NULL, step_description LONGTEXT, step_photo LONGTEXT, sequence_number INTEGER, step_title VARCHAR(255), tutorial_id INTEGER, PRIMARY KEY (step_id))
 ALTER TABLE material ADD CONSTRAINT FK_material_tutorial_id FOREIGN KEY (tutorial_id) REFERENCES tutorial (tutorial_id)
 ALTER TABLE step ADD CONSTRAINT FK_step_tutorial_id FOREIGN KEY (tutorial_id) REFERENCES tutorial (tutorial_id)
