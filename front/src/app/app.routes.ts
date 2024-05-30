@@ -5,19 +5,23 @@ import { StepComponent } from './components/step/step.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 export const routes: Routes = [
 	{
-		path: "/",
+		path: "",
 		component: HomeComponent
 	},
 	{
-		path: "/:id",
+		path: "home",
+		component: HomeComponent
+	},
+	{
+		path: "tutorial/:id",
 		component: TutorialComponent
 	},
 	{
-		path: "/:id/step/:stepId",
+		path: "tutorial/:id/step/:stepId",
 		component: StepComponent
 	},
 	{
-		path: "/*",
+		path: "**",
 		component: NotFoundComponent
 	}
 ];
