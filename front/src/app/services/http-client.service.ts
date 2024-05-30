@@ -15,7 +15,7 @@ export class HttpClientService {
   // warning : this way not work, since the result is returned before the data is fetched so it may be empty.
   //
   get<T>(url: string): Observable<T[]> {
-    return this.http.get(URL + url).pipe(
+    return this.http.get(HttpClientService.URL + url).pipe(
       map((response: Object) => {
         const apiResponse = response as ApiResponse<T>;
         if (apiResponse.success) {
@@ -30,7 +30,7 @@ export class HttpClientService {
   }
 
   post<T>(url: string, data: any) : Observable<T[]> {
-    return this.http.post( URL + url, data).pipe(
+    return this.http.post( HttpClientService.URL + url, data).pipe(
       map((response: Object) => {
         const apiResponse = response as ApiResponse<T>;
         if (apiResponse.success) {
@@ -45,7 +45,7 @@ export class HttpClientService {
   }
 
   put<T>(url: string, data: any) : Observable<T[]> {
-    return this.http.put( URL + url, data).pipe(
+    return this.http.put( HttpClientService.URL + url, data).pipe(
       map((response: Object) => {
         const apiResponse = response as ApiResponse<T>;
         if (apiResponse.success) {
@@ -60,7 +60,7 @@ export class HttpClientService {
   }
 
   delete<T>(url: string)  : Observable<T[]>  {
-    return this.http.delete( URL + url).pipe(
+    return this.http.delete( HttpClientService.URL + url).pipe(
       map((response: Object) => {
         const apiResponse = response as ApiResponse<T>;
         if (apiResponse.success) {
