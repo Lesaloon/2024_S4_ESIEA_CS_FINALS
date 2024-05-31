@@ -147,7 +147,18 @@ public class TutorialService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateTutorial(Tutorial tutorial, @PathParam("id") int id) {
-		return Response.ok().entity("Hello World").build();
+		logger.info("Updating tutorial id {}", id);
+		try {
+			tutorial.setId(id);
+			DAOFactory.getTutorialDAO().update(tutorial);
+			final String entity = JSONResponseBuilder.createSuccessResponse("Tutorial updated successfully", tutorial);
+			return Response.ok().entity(entity).build();
+		} catch (Exception e) {
+			logger.error("An error occurred while updating tutorial id {}", id, e);
+			final String entity = JSONResponseBuilder
+					.createErrorResponse("An error occurred while updating tutorial id " + id, e);
+			return Response.serverError().entity(entity).build();
+		}
 	}
 
 	@DELETE

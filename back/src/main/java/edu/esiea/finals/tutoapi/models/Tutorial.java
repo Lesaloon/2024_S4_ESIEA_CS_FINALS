@@ -2,10 +2,6 @@ package edu.esiea.finals.tutoapi.models;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
-
 import edu.esiea.finals.tutoapi.models.enums.DifficultyLevel;
 import edu.esiea.finals.tutoapi.models.enums.Type;
 
