@@ -1,0 +1,49 @@
+.green {
+	background-color: rgb(46, 204, 113);
+}
+
+.orange {
+	background-color: rgb(243, 156, 18);
+}
+
+.red {
+	background-color: rgb(231, 76, 60);
+}
+
+.gray {
+	background-color: rgb(149, 165, 166) !important;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.dot:last-of-type {
+	margin-right: 0;
+}
+
+.media {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 0px;
+}
+
+.container {
+	margin: 20px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 33% 33% 33%;
+	grid-gap: 20px;
+}
+
+.hover {
+	transition: 0.1s;
+}
+
+.hover:hover {
+	transform: scale(1.01) rotate(.5deg);
+}
