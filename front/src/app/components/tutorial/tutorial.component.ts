@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { DifficultyLevel } from '../../enum/difficulty-level';
 import { TypeOfTutorial } from '../../enum/type-of-tutorial';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-tutorial',
@@ -16,7 +17,9 @@ export class TutorialComponent implements OnInit {
 
   tutorial: Tutorial = {} as Tutorial;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private apiService: ApiService,
+    private route: ActivatedRoute,
+    private utils: UtilsService) { }
 
   ngOnInit(): void {
     this.apiService.getTutorial(this.route.snapshot.params['id']).subscribe((data: Tutorial[]) => {
@@ -24,29 +27,11 @@ export class TutorialComponent implements OnInit {
     });
   }
 
-  getFrenchDifficulty(difficulty: DifficultyLevel): string {
-    switch (difficulty) {
-      case DifficultyLevel.EASY:
-        return 'Facile';
-      case DifficultyLevel.MEDIUM:
-        return 'Moyen';
-      case DifficultyLevel.HARD:
-        return 'Difficile';
-      default:
-        return 'Inconnu';
-    }
+  getFrenchType(type: TypeOfTutorial): string {
+    return this.utils.getTypeOfTutorial(type);
   }
 
-  getFrenchType(type: TypeOfTutorial): string {
-    switch (type) {
-      case TypeOfTutorial.ARTS_AND_CRAFTS:
-        return 'Loisirs créatifs';
-      case TypeOfTutorial.COOKING:
-        return 'Cuisine';
-      case TypeOfTutorial.DIY:
-        return 'Bricolage';
-      default:
-        return 'Inconnu';
-    }
+  getFrenchDifficulty(difficulty: DifficultyLevel): string {
+    return this.utils.getDifficultyLevel(difficulty);
   }
 }
