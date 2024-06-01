@@ -1,0 +1,34 @@
+<div class="card hover">
+	<div class="card-image">
+		<figure class="image">
+			<img src="{{ tutorial.photo }}" alt="Placeholder image" />
+		</figure>
+	</div>
+	<div class="card-content">
+		<div class="media">
+			<h1 class="title is-4">{{ tutorial.title }}</h1>
+		</div>
+		<div class="content">
+			<div class="media">
+				<p class="subtitle is-6">
+					Difficulté:
+					<span class="dot green"
+						[class.gray]="tutorial.difficultyLevel != 'EASY' && tutorial.difficultyLevel != 'MEDIUM' && tutorial.difficultyLevel != 'HARD'"></span>
+					<span class="dot orange"
+						[class.gray]="tutorial.difficultyLevel != 'MEDIUM' && tutorial.difficultyLevel != 'HARD'"></span>
+					<span class="dot red" [class.gray]="tutorial.difficultyLevel != 'HARD'"></span>
+				</p>
+				<p class="subtitle is-6">
+					{{ tutorial.timeToComplete ? 'Durée: ' + tutorial.timeToComplete + ' minute(s)': ''}}
+				</p>
+			</div>
+			<p class="subtitle is-6">
+				{{ tutorial.description }}
+			</p>
+		</div>
+		<footer class="card-footer">
+			<a class="card-footer-item" (click)="goToTutorial()">Voir le tutoriel</a>
+			<a class="card-footer-item" (click)="goToEditTutorial()">Modifier</a>
+		</footer>
+	</div>
+</div>
