@@ -158,12 +158,9 @@ export class CreateAndEditTutorialComponent {
     }));
   }
 
-
-
   removeStep(index: number) {
     this.steps.removeAt(index);
   }
-
   moveStepUp(index: number) {
     if (index > 0) {
       const step = this.steps.at(index);
@@ -173,7 +170,6 @@ export class CreateAndEditTutorialComponent {
       this.tutorialForm.setControl('steps', this.steps);
     }
   }
-
   moveStepDown(index: number) {
     if (index < this.steps.length - 1) {
       const step = this.steps.at(index);
@@ -185,9 +181,6 @@ export class CreateAndEditTutorialComponent {
     console.log(this.steps);
   }
 
-  trackByIndex(index: number, obj: any): any {
-    return index;
-  }
   getFrenchType(type: TypeOfTutorial): string {
     return this.utils.getTypeOfTutorial(type);
   }
@@ -247,12 +240,24 @@ export class CreateAndEditTutorialComponent {
     const reader = new FileReader();
     reader.onload = () => {
       this.tutorialForm.patchValue({ [controlName]: reader.result });
-      console.log(this.tutorialForm.value.photo);
     };
     reader.readAsDataURL(file);
 
     // show the image
     const img = document.getElementById(controlName + '_img') as HTMLImageElement;
+    img.src = URL.createObjectURL(file);
+  }
+
+  onMaterialImageChange(event: any, controlName: string, index: number) {
+    const file = event.target.files[0];
+    // make base64 string from file
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.materials.at(index).patchValue({ [controlName]: reader.result });
+    };
+    reader.readAsDataURL(file);
+    // show the image
+    const img = document.getElementById(controlName + '_img_material_'  + index) as HTMLImageElement;
     img.src = URL.createObjectURL(file);
   }
 
@@ -262,11 +267,10 @@ export class CreateAndEditTutorialComponent {
     const reader = new FileReader();
     reader.onload = () => {
       this.steps.at(index).patchValue({ [controlName]: reader.result });
-      console.log(this.steps.at(index).value.photo);
     };
     reader.readAsDataURL(file);
     // show the image
-    const img = document.getElementById(controlName + '_img_' + index) as HTMLImageElement;
+    const img = document.getElementById(controlName + '_img_step_' + index) as HTMLImageElement;
     img.src = URL.createObjectURL(file);
   }
 }
