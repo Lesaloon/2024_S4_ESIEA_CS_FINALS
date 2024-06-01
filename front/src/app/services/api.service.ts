@@ -20,8 +20,8 @@ export class ApiService {
     return this.HttpClientService.get<Tutorial>('tutorials/' + id);
   }
 
-  addTutorial(tutorial: Tutorial) {
-    return this.HttpClientService.post('tutorials/add', tutorial);
+  addTutorial(tutorial: Tutorial) : Observable<Tutorial[]> {
+    return this.HttpClientService.post<Tutorial>('tutorials/add', tutorial);
   }
 
   updateTutorial(tutorial: Tutorial) {

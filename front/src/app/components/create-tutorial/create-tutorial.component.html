@@ -1,1 +1,201 @@
-<p>create-tutorial works!</p>
+<div class="container">
+	<h1 class="title is-1 has-text-centered">Formulaire de création de tutoriel</h1>
+	<form [formGroup]="tutorialForm" (ngSubmit)="onSubmit()">
+		<div class="field">
+			<label class="label" for="title">Titre</label>
+			<div class="control">
+				<input class="input" id="title" formControlName="title" type="text">
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label" for="type">Catégorie</label>
+			<div class="control">
+				<div class="select">
+					<select id="type" formControlName="type" >
+						@for (type of types; track $index) {
+						<option value="{{ type }}">{{ getFrenchType(type) }}</option>
+						}
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label" for="description">Description</label>
+			<div class="control">
+				<textarea class="textarea" id="description" formControlName="description"></textarea>
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label" for="tools">Outils</label>
+			<div class="control">
+				<input class="input" id="tools" formControlName="tools" type="text">
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label" for="toolsPhoto">Photo des outils</label>
+			<div class="control">
+				<div class="file is-info">
+					<label class="file-label">
+						<input class="file-input" type="file" (change)="onImageChange($event, 'toolsPhoto')" />
+						<span class="file-cta">
+							<span class="file-icon">
+								<i class="fas fa-upload"></i>
+							</span>
+							<span class="file-label"> Selectionner un fichier… </span>
+						</span>
+					</label>
+				</div>
+				<img id="toolsPhoto_img" alt="tools photo" class="image is-square cover" src="/assets/no-image.jpeg"/>
+			</div>
+		</div>
+		<div class="field">
+			<label class="label" for="photo">Photo</label>
+			<div class="control">
+				<div class="file is-info">
+					<label class="file-label">
+						<input class="file-input" type="file" (change)="onImageChange($event, 'photo')" />
+						<span class="file-cta">
+							<span class="file-icon">
+								<i class="fas fa-upload"></i>
+							</span>
+							<span class="file-label"> Selectionner un fichier… </span>
+						</span>
+					</label>
+				</div>
+				<img id="photo_img" alt="tools photo" class="image is-square cover" src="/assets/no-image.jpeg"/>
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label" for="timeToComplete">Temps de réalisation</label>
+			<div class="control">
+				<input class="input" id="timeToComplete" formControlName="timeToComplete" type="number">
+				<p class="help">En minutes</p>
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label" for="cost">Coût</label>
+			<div class="control">
+				<input class="input" id="cost" formControlName="cost" type="number">
+				<p class="help">En euros (€)</p>
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="label" for="difficultyLevel">Difficulté</label>
+			<div class="control">
+				<div class="select">
+					<select id="difficultyLevel" formControlName="difficultyLevel">
+						@for (difficulty of difficulties; track $index) {
+						<option value="{{ difficulty }}">{{ getFrenchDifficulty(difficulty) }}</option>
+						}
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="field">
+			<h3 class="title is-4">Matériels nécessaires</h3>
+			<button class="button is-primary" type="button" (click)="addMaterial()">Add Material</button>
+			<div formArrayName="materials">
+				@for (material of materials.controls; track $index) {
+				<div [formGroupName]="$index" class="box">
+					<div class="field">
+						<label class="label" for="name">Nom</label>
+						<div class="control">
+							<input class="input" id="name" formControlName="name" type="text">
+						</div>
+					</div>
+					<div class="field">
+						<label class="label" for="description">Description</label>
+						<div class="control">
+							<textarea class="textarea" id="description" formControlName="description"></textarea>
+						</div>
+					</div>
+					<div class="field">
+						<label class="label" for="quantity">Quantité</label>
+						<div class="control">
+							<input class="input" id="quantity" formControlName="quantity" type="number">
+						</div>
+					</div>
+					<div class="field">
+						<label class="label" for="unit">Unité</label>
+						<div class="control">
+							<input class="input" id="unit" formControlName="unit" type="text">
+							<p class="help">Ex: pièce, mètre, litre, …</p>
+						</div>
+					</div>
+					<button class="button is-danger" type="button" (click)="removeMaterial($index)">Supprimer</button>
+				</div>
+				}
+			</div>
+		</div>
+
+		<div class="field">
+			<h3 class="title is-4">Steps</h3>
+			<button class="button is-primary" type="button" (click)="addStep()">Ajouter une étape</button>
+			<div formArrayName="steps">
+				@for (step of steps.controls; track $index) {
+
+				<div [formGroupName]="$index" class="box">
+					<div class="field">
+						<label class="label" for="title">Titre</label>
+						<div class="control">
+							<input class="input" id="title" formControlName="title" type="text">
+						</div>
+					</div>
+					<div class="field">
+						<label class="label" for="description">Description</label>
+						<div class="control">
+							<textarea class="textarea" id="description" formControlName="description"></textarea>
+						</div>
+					</div>
+					<div class="field">
+						<label class="label" for="photo">Photo</label>
+						<div class="control">
+							<div class="file is-info">
+								<label class="file-label">
+									<input class="file-input" type="file" (change)="onStepImageChange($event, 'photo', $index)" />
+									<span class="file-cta">
+										<span class="file-icon">
+											<i class="fas fa-upload"></i>
+										</span>
+										<span class="file-label"> Selectionner un fichier… </span>
+									</span>
+								</label>
+							</div>
+							<img id="photo_img_{{ $index }}" alt="step photo" class="image is-square cover" src="/assets/no-image.jpeg" />
+						</div>
+					</div>
+					<div class="field is-grouped">
+						<div class="control">
+							<button class="button is-warning" type="button" (click)="moveStepUp($index)">Monter</button>
+						</div>
+						<div class="control">
+							<button class="button is-warning" type="button"
+								(click)="moveStepDown($index)">Descendre</button>
+						</div>
+						<div class="control">
+							<button class="button is-danger" type="button"
+								(click)="removeStep($index)">Supprimer</button>
+						</div>
+					</div>
+				</div>
+				}
+			</div>
+		</div>
+
+		<div class="field">
+			<div class="control">
+				<button class="button is-success" type="submit">Envoyer</button>
+			</div>
+		</div>
+	</form>
+
+
+</div>
