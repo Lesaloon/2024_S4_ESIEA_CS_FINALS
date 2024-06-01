@@ -21,3 +21,8 @@ img.cover {
 	object-fit: cover;
 	height: 200px;
 }
+
+.is-vcentered {
+	display: flex;
+	align-items: center;
+}
