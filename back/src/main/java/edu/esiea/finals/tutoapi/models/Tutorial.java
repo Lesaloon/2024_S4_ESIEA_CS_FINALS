@@ -32,26 +32,21 @@ public class Tutorial {
     @Column(name = "tools")
     private String tools;
     
+    @Lob
     @Column(name = "tutorial_tools_photo")
     private String toolsPhoto;
-    
-    @Column(name = "tutorial_tools_photo_type")
-    private String toolsPhotoType;
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "tutorial_id")
     private List<Material> materials;
-    
+
     @Lob
     @Column(name = "tutorial_photo")    
     private String photo;
-    
-    @Column(name = "tutorial_photo_type")
-    private String photoType; // image/jpeg, image/png, etc.
 
     @Column(name = "time_to_complete")
     private Integer timeToComplete;
-    
+
     @Column(name = "cost")
     private Double cost;
     
@@ -134,6 +129,20 @@ public class Tutorial {
 	}
 
 	/**
+	 * @return the toolsPhoto
+	 */
+	public final String getToolsPhoto() {
+		return toolsPhoto;
+	}
+
+	/**
+	 * @param toolsPhoto the toolsPhoto to set
+	 */
+	public final void setToolsPhoto(String toolsPhoto) {
+		this.toolsPhoto = toolsPhoto;
+	}
+
+	/**
 	 * @return the materials
 	 */
 	public final List<Material> getMaterials() {
@@ -159,20 +168,6 @@ public class Tutorial {
 	 */
 	public final void setPhoto(String photo) {
 		this.photo = photo;
-	}
-
-	/**
-	 * @return the photoType
-	 */
-	public final String getPhotoType() {
-		return photoType;
-	}
-
-	/**
-	 * @param photoType the photoType to set
-	 */
-	public final void setPhotoType(String photoType) {
-		this.photoType = photoType;
 	}
 
 	/**

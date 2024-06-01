@@ -26,10 +26,7 @@ public class Step {
     
     @Lob
     @Column(name = "step_photo")
-    private String photo;
-    
-    @Column(name = "step_photo_type")
-    private String photoType;
+    private String photo; // base 64
     
     /**
 	 * @return the id

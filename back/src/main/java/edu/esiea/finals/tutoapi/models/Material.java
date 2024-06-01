@@ -22,9 +22,6 @@ public class Material {
     @Lob
     @Column(name = "material_photo")
     private String photo;
-
-    @Column(name = "material_photo_type")
-    private String photoType;
     
     @Column(name = "material_quantity")
     private Integer quantity;
