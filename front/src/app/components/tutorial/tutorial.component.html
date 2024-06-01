@@ -1,1 +1,91 @@
-<p>tutorial works!</p>
+<div class="container">
+	<h1 class="title is-1 has-text-centered">{{tutorial.title}}</h1>
+	<h2 class="subtitle is-3 has-text-centered">{{ getFrenchType(tutorial.type) }}</h2>
+
+	<div class="section">
+		<div class="image">
+			<img src="data:{{ tutorial.photoType }};base64,{{ tutorial.photo }}" alt="Placeholder image" />
+		</div>
+		<div class="description">
+			<h1 class="title is-4">Description :</h1>
+			<p class="subtitle is-6">
+				{{tutorial.description}}
+			</p>
+		</div>
+		<div class="time">
+			<h1 class="title is-4">Durée de l'activité : {{tutorial.timeToComplete ? tutorial.timeToComplete + ' minute(s)': 'non renseignée'}}</h1>
+		</div>
+		<div class="difficulty">
+			<h1 class="title is-4">Difficulté : {{ getFrenchDifficulty(tutorial.difficultyLevel) }} </h1>
+		</div>
+		<div class="cost">
+			<h1 class="title is-4">Coût : {{tutorial.cost ? tutorial.cost + ' €' : 'non renseigné'}} </h1>
+		</div>
+		<div class="tools">
+			<h1 class="title is-4">Outils nécessaires :</h1>
+			<div class="card">
+				<div class="card-image">
+					<figure class="image is-3by1">
+						<img src="data:{{ tutorial.photoType }};base64,{{ tutorial.photo }}" />
+					</figure>
+				</div>
+				<div class="card-content">
+					<div class="content">
+						<p class="subtitle is-6">
+							{{ tutorial.tools }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="materials">
+			<h1 class="title is-4">Matériaux :</h1>
+			<div class="materials-container">
+				@for (material of tutorial.materials; track $index) {
+				<div class="card">
+					<header class="card-header">
+						<p class="card-header-title is-4">
+							{{ material.name }} ({{ material.quantity }} {{ material.unit }})
+						</p>
+					</header>
+					<div class="card-content">
+						<div class="content">
+							<p class="subtitle is-6">
+								{{ material.description }}
+							</p>
+						</div>
+					</div>
+				</div>
+				}
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="section steps">
+		<h1 class="title is-4">Étapes :</h1>
+		@for (step of tutorial.steps; track $index) {
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">
+					Étape {{ $index + 1 }}
+				</p>
+			</header>
+			<div class="card-image">
+				<figure class="image is-3by1">
+					<img src="data:{{ step.photoType }};base64,{{ step.photo }}" />
+				</figure>
+			</div>
+			<div class="card-content">
+				<div class="content">
+					<p class="subtitle is-6">
+						{{ step.description }}
+					</p>
+				</div>
+			</div>
+		</div>
+		}
+	</div>
+
+</div>
