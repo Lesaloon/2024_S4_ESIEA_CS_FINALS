@@ -23,4 +23,7 @@ export class NavBarComponent {
   goHome() {
     this.router.navigate(['/']);
   }
+  goCreate() {
+    this.router.navigate(['/create']);
+  }
 }
