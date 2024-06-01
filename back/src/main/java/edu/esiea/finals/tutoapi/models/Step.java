@@ -28,6 +28,9 @@ public class Step {
     @Column(name = "step_photo")
     private String photo;
     
+    @Column(name = "step_photo_type")
+    private String photoType;
+    
     /**
 	 * @return the id
 	 */

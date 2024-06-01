@@ -32,6 +32,12 @@ public class Tutorial {
     @Column(name = "tools")
     private String tools;
     
+    @Column(name = "tutorial_tools_photo")
+    private String toolsPhoto;
+    
+    @Column(name = "tutorial_tools_photo_type")
+    private String toolsPhotoType;
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "tutorial_id")
     private List<Material> materials;
