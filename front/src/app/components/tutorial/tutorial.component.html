@@ -4,7 +4,7 @@
 
 	<div class="section">
 		<div class="image">
-			<img src="data:{{ tutorial.photoType }};base64,{{ tutorial.photo }}" alt="Placeholder image" />
+			<img src="{{ tutorial.photo }}" alt="Placeholder image" />
 		</div>
 		<div class="description">
 			<h1 class="title is-4">Description :</h1>
@@ -26,7 +26,7 @@
 			<div class="card">
 				<div class="card-image">
 					<figure class="image is-3by1 rounded">
-						<img src="data:{{ tutorial.photoType }};base64,{{ tutorial.photo }}" />
+						<img src="{{ tutorial.photo }}" />
 					</figure>
 				</div>
 				<div class="card-content">
@@ -72,7 +72,7 @@
 			</header>
 			<div class="card-image">
 				<figure class="image is-3by1">
-					<img src="data:{{ step.photoType }};base64,{{ step.photo }}" />
+					<img src="{{ step.photo }}" />
 				</figure>
 			</div>
 			<div class="card-content">
