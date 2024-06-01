@@ -5,11 +5,12 @@ import { ActivatedRoute } from '@angular/router';
 import { DifficultyLevel } from '../../enum/difficulty-level';
 import { TypeOfTutorial } from '../../enum/type-of-tutorial';
 import { UtilsService } from '../../services/utils.service';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-tutorial',
   standalone: true,
-  imports: [],
+  imports: [QuillModule],
   templateUrl: './tutorial.component.html',
   styleUrl: './tutorial.component.css'
 })
