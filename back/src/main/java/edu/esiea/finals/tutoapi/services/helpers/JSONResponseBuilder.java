@@ -7,7 +7,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSONResponseBuilder {
-	Map<String, Object> response = new HashMap<String, Object>();
+	private Map<String, Object> response = new HashMap<String, Object>();
 
 	public JSONResponseBuilder() {
 

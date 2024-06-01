@@ -7,11 +7,15 @@ import edu.esiea.finals.tutoapi.interfaces.IDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class GenericDAO<T> implements IDAO<T> {
 
 	protected DAOBDDHelper bdd = null;
 	protected EntityManager em = null;
 	protected Class<T> persistentClass = null;
+	final Logger logger = LogManager.getLogger(GenericDAO.class);
 
 	public GenericDAO(final Class<T> persistentClass) {
 		try {
@@ -19,7 +23,7 @@ public class GenericDAO<T> implements IDAO<T> {
 			this.em = this.bdd.getEm();
 		} catch (final Exception e) {
 			this.bdd = null;
-			System.out.println("Unable to create EntityManager");
+			logger.error("Erreur lors de la création de l'instance DAOBDDHelper", e);
 		}
 		this.persistentClass = persistentClass;
 	}
