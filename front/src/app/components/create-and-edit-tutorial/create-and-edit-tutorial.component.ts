@@ -33,8 +33,7 @@ export class CreateAndEditTutorialComponent {
   constructor(private apiService: ApiService,
     private router: Router,
     private utils: UtilsService,
-    private fb: FormBuilder,
-    private renderer: Renderer2) { }
+    private fb: FormBuilder) { }
 
   /**
    * a l'initialisation du composant
