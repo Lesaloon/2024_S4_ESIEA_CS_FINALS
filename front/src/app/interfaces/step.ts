@@ -4,4 +4,5 @@ export interface Step {
 	sequenceNumber: number;
 	description: string;
 	photo: string; // une représentation en base64
+	photoType: string; // le type de l'image ( image/png, image/jpeg, ...)
 }

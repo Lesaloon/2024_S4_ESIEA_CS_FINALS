@@ -1,3 +1,6 @@
 export enum TypeOfTutorial {
-	"COOKING", "DIY", "ARTS_AND_CRAFTS"
+	//"COOKING", "DIY", "ARTS_AND_CRAFTS"
+	COOKING = "COOKING",
+	DIY = "DIY",
+	ARTS_AND_CRAFTS = "ARTS_AND_CRAFTS"
 }
