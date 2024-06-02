@@ -24,6 +24,11 @@ export class CreateAndEditTutorialComponent {
   // variables
   isLoaded = false;
   createMode = true;
+  id = this.router.url.split('/')[2];
+  mainImage: string = '';
+  toolsImage: string = '';
+  materialsImages: string[] = [];
+  stepsImages: string[] = [];
 
   tutorialForm: FormGroup = this.fb.group({});
   types = Object.values(TypeOfTutorial);
@@ -60,14 +65,13 @@ export class CreateAndEditTutorialComponent {
       });
       this.isLoaded = true;
     } else {
-      const id = this.router.url.split('/')[2];
-      if (id === undefined || id === '' || id === null || isNaN(Number(id))) {
+      if (this.id === undefined || this.id === '' || this.id === null || isNaN(Number(this.id))) {
         console.log('id is not a number or is undefined');
         this.router.navigate(['/create']);
         return;
       }
 
-      const tutorialId = Number(id);
+      const tutorialId = Number(this.id);
       this.apiService.getTutorial(tutorialId).subscribe(
         {
           // si on a bien récupéré le tutoriel
@@ -92,6 +96,10 @@ export class CreateAndEditTutorialComponent {
               steps: this.fb.array([])
             });
 
+            // loads the images in the img tags
+            this.mainImage = tutorial.photo;
+            this.toolsImage = tutorial.toolsPhoto;
+
             // add materials
             console.log(tutorial.materials);
             tutorial.materials.forEach((material: Material) => {
@@ -114,6 +122,16 @@ export class CreateAndEditTutorialComponent {
                 photo: [step.photo, Validators.required]
               }));
             });
+
+            // loads the images in the img tags
+            for (let i = 0; i < this.materials.length; i++) {
+              this.materialsImages.push(tutorial.materials[i].photo);
+            }
+            for (let i = 0; i < this.steps.length; i++) {
+              this.stepsImages.push(tutorial.steps[i].photo);
+            }
+
+
           },
           error: (error) => {
             console.error(error);
@@ -230,7 +248,13 @@ export class CreateAndEditTutorialComponent {
         this.tutorialForm.controls[control].markAsTouched();
       }
     }
-
+  }
+  deleteTutorial( ) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer ce tutoriel ?')) {
+      this.apiService.deleteTutorial(Number(this.id)).subscribe(() => {
+        this.router.navigate(['/']);
+      });
+    }
   }
 
   onImageChange(event: any, controlName: string) {

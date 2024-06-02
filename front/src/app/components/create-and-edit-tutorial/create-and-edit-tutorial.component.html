@@ -62,7 +62,7 @@
 							</span>
 						</label>
 					</div>
-					<img id="toolsPhoto_img" alt="tools photo" class="image is-square cover" src="/assets/no-image.jpeg"/>
+					<img id="toolsPhoto_img" alt="tools photo" class="image is-square cover" src="{{ toolsImage ? toolsImage : '/assets/no-image.jpeg' }}" />
 				</div>
 			</div>
 			<div class="field">
@@ -79,7 +79,7 @@
 							</span>
 						</label>
 					</div>
-					<img id="photo_img" alt="tools photo" class="image is-square cover" src="/assets/no-image.jpeg"/>
+					<img id="photo_img" alt="tools photo" class="image is-square cover" src="{{ mainImage ? mainImage : '/assets/no-image.jpeg' }}" />
 				</div>
 			</div>
 
@@ -144,7 +144,7 @@
 										</span>
 									</label>
 								</div>
-								<img id="photo_img_material_{{ $index }}" alt="step photo" class="image is-square cover" src="/assets/no-image.jpeg" />
+								<img id="photo_img_material_{{ $index }}" alt="step photo" class="image is-square cover" src="{{ materialsImages[$index] ? materialsImages[$index] : '/assets/no-image.jpeg' }}" />
 							</div>
 						</div>
 						<div class="field">
@@ -199,7 +199,7 @@
 										</span>
 									</label>
 								</div>
-								<img id="photo_img_step_{{ $index }}" alt="step photo" class="image is-square cover" src="/assets/no-image.jpeg" />
+								<img id="photo_img_step_{{ $index }}" alt="step photo" class="image is-square cover" src="{{ stepsImages[$index] ? stepsImages[$index] : '/assets/no-image.jpeg' }}" />
 							</div>
 						</div>
 						<div class="field is-grouped">

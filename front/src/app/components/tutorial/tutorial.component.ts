@@ -7,19 +7,17 @@ import { TypeOfTutorial } from '../../enum/type-of-tutorial';
 import { UtilsService } from '../../services/utils.service';
 import { QuillModule } from 'ngx-quill';
 import { RouterModule } from '@angular/router';
-import { ModalComponent } from '../../shared/modal/modal.component';
 
 
 @Component({
   selector: 'app-tutorial',
   standalone: true,
-  imports: [QuillModule, RouterModule, ModalComponent],
+  imports: [QuillModule, RouterModule],
   templateUrl: './tutorial.component.html',
   styleUrl: './tutorial.component.css'
 })
 export class TutorialComponent implements OnInit {
 
-  isModalActive: WritableSignal<boolean> = signal(false);
   tutorial: Tutorial = {} as Tutorial;
 
   constructor(private apiService: ApiService,
