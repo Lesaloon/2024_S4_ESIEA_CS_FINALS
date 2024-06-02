@@ -17,4 +17,22 @@
 			<property name="eclipselink.jdbc.batch-writing" value="JDBC" />
 		</properties>
 	</persistence-unit>
+	<persistence-unit name="TutoPU-test">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>edu.esiea.finals.tutoapi.models.Material</class>
+		<class>edu.esiea.finals.tutoapi.models.Tutorial</class>
+		<class>edu.esiea.finals.tutoapi.models.Step</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+		    <property name="javax.persistence.jdbc.driver"
+		                    value="org.hsqldb.jdbcDriver" />
+		    <property name="javax.persistence.jdbc.url"
+		                    value="jdbc:hsqldb:mem:sample" />
+	        <property name="eclipselink.dll-generation" value="create-tables" />
+	        <property name="eclipselink.dll-generation-mode" value="ddl_database_generation" />
+	        <property name="eclipselink.dll-generation.output-mode" value="database" />
+	        <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />	        
+	        <property name="eclipselink.logging.level" value="WARNING" />
+        </properties>
+	</persistence-unit>
 </persistence>

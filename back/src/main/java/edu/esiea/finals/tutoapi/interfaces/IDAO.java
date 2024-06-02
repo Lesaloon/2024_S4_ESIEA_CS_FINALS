@@ -3,7 +3,7 @@ package edu.esiea.finals.tutoapi.interfaces;
 import java.util.List;
 import java.util.function.Predicate;
 
-public interface IDAO<T> {
+public interface  IDAO<T>  {
 	/**
 	 * Create a new object
 	 *

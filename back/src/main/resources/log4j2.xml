@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Rolling file appender for general logging with sequential file naming -->
+        <RollingFile name="TutoAPIAppender" fileName="TutoAPI_01.log"
+                     filePattern="TutoAPI_%i.log" immediateFlush="true">
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </RollingFile>
+        
+        <!-- File appender for error logging outside the service layer -->
+        <File name="ErrorFileAppender" fileName="TutoErrors.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %c{1} - %msg%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- Logger for general logging -->
+        <Logger name="edu.esiea.finals.tutoapi.services" level="info" additivity="false">
+            <AppenderRef ref="TutoAPIAppender"/>
+        </Logger>
+
+        <!-- Logger for logging errors outside of the service layer -->
+        <Logger name="ErrorLogger" level="error" additivity="false">
+            <AppenderRef ref="ErrorFileAppender"/>
+        </Logger>
+
+        <!-- Root logger to log INFO or higher levels by default -->
+        <Root level="info">
+            <AppenderRef ref="TutoAPIAppender"/>
+        </Root>
+        <Root level="error">
+            <AppenderRef ref="ErrorFileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

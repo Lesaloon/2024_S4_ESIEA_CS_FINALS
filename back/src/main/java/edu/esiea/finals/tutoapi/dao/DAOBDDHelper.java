@@ -65,5 +65,8 @@ public class DAOBDDHelper {
 			transaction.rollback();
 		}
 	}
-
+	
+	public void close() {
+		this.em.close();
+	}
 }
