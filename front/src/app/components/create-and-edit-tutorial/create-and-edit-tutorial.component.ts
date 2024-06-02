@@ -13,11 +13,11 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-create-and-edit-tutorial',
-  standalone: true,
-  imports: [ReactiveFormsModule, QuillModule],
-  templateUrl: './create-and-edit-tutorial.component.html',
-  styleUrl: './create-and-edit-tutorial.component.css'
+    selector: 'app-create-and-edit-tutorial',
+    standalone: true,
+    templateUrl: './create-and-edit-tutorial.component.html',
+    styleUrl: './create-and-edit-tutorial.component.css',
+    imports: [ReactiveFormsModule, QuillModule]
 })
 export class CreateAndEditTutorialComponent {
 
@@ -185,6 +185,9 @@ export class CreateAndEditTutorialComponent {
       this.steps.setControl(index, previousStep);
       this.steps.setControl(index - 1, step);
       this.tutorialForm.setControl('steps', this.steps);
+      // change image
+      const stepImage = this.stepsImages[index];
+      this.stepsImages[index] = this.stepsImages[index - 1];
     }
   }
   moveStepDown(index: number) {
@@ -194,6 +197,10 @@ export class CreateAndEditTutorialComponent {
       this.steps.setControl(index, nextStep);
       this.steps.setControl(index + 1, step);
       this.tutorialForm.setControl('steps', this.steps);
+      // change image
+      const stepImage = this.stepsImages[index];
+      this.stepsImages[index] = this.stepsImages[index + 1];
+      this.stepsImages[index + 1] = stepImage;
     }
     console.log(this.steps);
   }
