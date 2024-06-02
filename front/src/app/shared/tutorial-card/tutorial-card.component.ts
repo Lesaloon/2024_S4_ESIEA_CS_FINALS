@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Tutorial } from '../../interfaces/tutorial';
 import { DifficultyLevel } from '../../enum/difficulty-level';
 import { TypeOfTutorial } from '../../enum/type-of-tutorial';
@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
   selector: 'app-tutorial-card',
   standalone: true,
   imports: [],
-  inputs: ['tutorial'],
   templateUrl: './tutorial-card.component.html',
   styleUrl: './tutorial-card.component.css'
 })
 export class TutorialCardComponent {
+  @Input()
   tutorial: Tutorial = {} as Tutorial;
 
   constructor(private utils: UtilsService,

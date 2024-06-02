@@ -1,0 +1,33 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>Image</th>
+			<th>Titre</th>
+			<th>Description</th>
+			<th>Difficulté</th>
+			<th>Durée</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (tutorial of tutorials; track $index) {
+			<tr>
+				<td>
+					<figure class="image is-128x128">
+						<img src="{{ tutorial.photo }}" alt="Placeholder image" />
+					</figure>
+				</td>
+				<td>{{ tutorial.title }}</td>
+				<td>{{ tutorial.description }}</td>
+				<td>
+					{{ getFrenchDifficulty(tutorial.difficultyLevel) }}
+				</td>
+				<td>{{ tutorial.timeToComplete ? tutorial.timeToComplete + ' minute(s)': ''}}</td>
+				<td>
+					<a (click)="goToTutorial(tutorial.id)">View</a>
+					<a (click)="goToEditTutorial(tutorial.id)">Edit</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

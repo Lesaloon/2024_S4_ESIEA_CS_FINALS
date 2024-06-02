@@ -1,6 +1,61 @@
+@if (isLoaded)
+{
+	@if (data) {<div class="container row">
+	<div class="select">
+		<select [(ngModel)]="viewMode">
+			<option value="list">Liste</option>
+			<option value="card" selected>Carte</option>
+		</select>
+	</div>
+	<div class="field">
+		<div class="control">
+			<input class="input" type="text" [(ngModel)]="searchText" placeholder="Rechercher un tutoriel..." />
+		</div>
+	</div>
+	<div class="field">
+		<div class="select">
+			<select [(ngModel)]="searchCategory">
+				<option value="">Toutes les catégories</option>
+				@for (category of ListOfCategories; track $index) {
+				<option value="{{ category }}">{{ getTypeOfTutorial(category) }}</option>
+				}
+			</select>
+		</div>
+	</div>
 
-<div class="container">
-	@for (tutorial of data; track $index) {
-		<app-tutorial-card [tutorial]="tutorial"></app-tutorial-card>
-	}
+
 </div>
+
+
+@if (viewMode == 'card') {
+<div class="container">
+	<div class="grid">
+		@for (tutorial of shownData; track $index) {
+		<app-tutorial-card [tutorial]="tutorial" />
+		}
+	</div>
+</div>
+
+} @else {
+<div class="container">
+	<app-tutorial-list [tutorials]="shownData" />
+</div>
+}
+
+} @else {
+	<div class="container">
+		<h1 class="title is-1 has-text-centered">
+			Pas de tutoriel trouvé
+		</h1>
+	</div>
+}
+} @else {
+	<div class="container">
+		<h1 class="title is-1 has-text-centered">
+			Chargement...
+		</h1>
+		<div class="container has-text-centered is-centered is-vcentered">
+			<progress class="progress is-large is-primary" max="100"></progress>
+		</div>
+	</div>
+}
