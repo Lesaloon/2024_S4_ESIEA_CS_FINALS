@@ -48,3 +48,8 @@
 	object-fit: cover;
 	border-radius: 0px;
 }
+
+.rounded {
+	object-fit: cover;
+	border-radius: 10px !important;
+}

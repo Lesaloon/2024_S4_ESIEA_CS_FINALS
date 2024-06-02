@@ -28,4 +28,8 @@ export class ApiService {
     const id = tutorial.id;
     return this.HttpClientService.put('tutorials/update/' + id, tutorial);
   }
+
+  deleteTutorial(id: number) {
+    return this.HttpClientService.delete('tutorials/' + id);
+  }
 }
